@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-color: pink;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1, .envelope-text {
+            color: red;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .heart {
+            font-size: 100px;
+            color: red;
+            margin-top: 20px;
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+        }
+        .yes {
+            background-color: green;
+            color: white;
+        }
+        .no {
+            background-color: red;
+            color: white;
+        }
+        img {
+            width: 200px;
+            height: auto;
+            margin-top: 10px;
+        }
+        .abrir {
+            background-color: green;
+            color: white;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <p class="envelope-text">Para Gloriana, de parte de Mauro ❤️</p>
+    <img src="sobrecorazon.png" alt="Sobre de carta">
+    <button onclick="openEnvelope()" class="abrir">Abrir</button>
+    
+    <div id="proposalScreen" style="display: none;">
+        <h1 id="question">¿Quieres ser mi San Valentín?</h1>
+        <div class="heart">❤️</div>
+        <div class="buttons">
+            <button class="yes" onclick="accept()">Sí</button>
+            <button class="no" onclick="decline()" id="noButton">No</button>
+        </div>
+    </div>
+
+    <script>
+        function openEnvelope() {
+            document.querySelector(".envelope-text").style.display = "none";
+            document.querySelector("img").style.display = "none";
+            document.querySelector(".abrir").style.display = "none";
+            document.getElementById("proposalScreen").style.display = "block";
+        }
+
+        let noClickCount = 0;
+        function decline() {
+            noClickCount++;
+            let noButton = document.getElementById("noButton");
+            let question = document.getElementById("question");
+
+            if (noClickCount === 1) {
+                question.innerText = "¿Estás segura?";
+            } else if (noClickCount === 2) {
+                question.innerText = "Piénsalo otra vez";
+            } else if (noClickCount === 3) {
+                question.innerText = "¿De verdad me dirías que no?";
+            } else if (noClickCount >= 4) {
+                noButton.style.display = "none";
+            }
+        }
+
+        function accept() {
+            document.body.innerHTML = "<h1 style='color: red;'>Te amo mi amor, gracias por aceptar ❤️</h1>";
+        }
+    </script>
+</body>
+</html>
